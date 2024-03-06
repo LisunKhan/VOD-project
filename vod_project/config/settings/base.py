@@ -49,7 +49,7 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres://localhost/vod_project",
+        default="postgres://postgres:postgres@localhost:5432/vod_test",
     ),
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
