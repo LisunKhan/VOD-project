@@ -1,0 +1,10 @@
+Hello {{ user.username }},
+
+Thank you for registering with us. Please click the link below to verify your email address:
+
+{{ protocol }}://{{ domain }}{% url 'account_confirm_email' key=confirmation_key %}
+
+If you didn't request this verification, please ignore this email.
+
+Best regards,
+Your App Team

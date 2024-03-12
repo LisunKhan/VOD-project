@@ -1,5 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-from django.db.models import CharField, DateField
+from django.db.models import CharField, DateField, EmailField
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -22,7 +22,7 @@ class User(AbstractUser):
     birth_date = DateField(null=True, blank=True)
     gender = CharField(_("Gender"), choices=GENDER_CHOICES, max_length=1, blank=True)
     address = CharField(_('User Address'), blank=True, max_length=300, null=True)
-
+    email = EmailField(unique=True)
     first_name = None  # type: ignore[assignment]
     last_name = None  # type: ignore[assignment]
 
