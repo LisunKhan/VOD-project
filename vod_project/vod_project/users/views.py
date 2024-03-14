@@ -1,5 +1,5 @@
+from django.contrib.auth import authenticate,login,logout
 from allauth.account.utils import send_email_confirmation
-from django.contrib.auth import authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ObjectDoesNotExist
@@ -14,7 +14,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import User
-from .serializers import UserProfileSerializer
+from .serializers import UserProfileSerializer,SendPasswordResetEmailSerializer,UserPasswordResetSerializer
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -87,3 +87,30 @@ class UserLoginAPIView(APIView):
             return Response({'token': token.key}, status=status.HTTP_200_OK)
 
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class UserChangePasswordAPIView(APIView):
+    def post(self, request):
+        old_password = request.data.get('old_password')
+        new_password = request.data.get('new_password')
+        user = request.user
+
+        if not user.check_password(old_password):
+            return Response({'detail': 'Invalid old password.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(new_password)
+        user.save()
+        return Response({'detail': 'Password changed successfully.'}, status=status.HTTP_200_OK)
+
+class SendPasswordResetEmailAPIView(APIView):
+  def post(self,request,format=None):
+      serializer = SendPasswordResetEmailSerializer(data=request.data)
+      serializer.is_valid(raise_exception=True)
+      return Response({'msg':'Password Reset link send. Please check your Email'}, status=status.HTTP_200_OK)
+  
+
+class UserPasswordResetAPIView(APIView):
+  permission_classes = [AllowAny]
+  def post(self, request, uid, token, format=None):
+    serializer = UserPasswordResetSerializer(data=request.data, context={'uid':uid, 'token':token})
+    serializer.is_valid(raise_exception=True)
+    return Response({'msg':'Password Reset Successfully'}, status=status.HTTP_200_OK)

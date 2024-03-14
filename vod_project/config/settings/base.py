@@ -46,6 +46,9 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+
+
+
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
@@ -151,6 +154,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    
 ]
 
 # STATIC
@@ -278,25 +282,25 @@ ACCOUNT_AUTHENTICATION_METHOD = "username"
 ACCOUNT_EMAIL_REQUIRED = True
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# https://docs.allauth.org/en/latest/account/configuration.html
-ACCOUNT_ADAPTER = "vod_project.users.adapters.AccountAdapter"
-# https://docs.allauth.org/en/latest/account/forms.html
-ACCOUNT_FORMS = {"signup": "vod_project.users.forms.UserSignupForm"}
-# https://docs.allauth.org/en/latest/socialaccount/configuration.html
-SOCIALACCOUNT_ADAPTER = "vod_project.users.adapters.SocialAccountAdapter"
-# https://docs.allauth.org/en/latest/socialaccount/configuration.html
-SOCIALACCOUNT_FORMS = {"signup": "vod_project.users.forms.UserSocialSignupForm"}
+# # https://docs.allauth.org/en/latest/account/configuration.html
+# ACCOUNT_ADAPTER = "vod_project.users.adapters.AccountAdapter"
+# # https://docs.allauth.org/en/latest/account/forms.html
+# ACCOUNT_FORMS = {"signup": "vod_project.users.forms.UserSignupForm"}
+# # https://docs.allauth.org/en/latest/socialaccount/configuration.html
+# SOCIALACCOUNT_ADAPTER = "vod_project.users.adapters.SocialAccountAdapter"
+# # https://docs.allauth.org/en/latest/socialaccount/configuration.html
+# SOCIALACCOUNT_FORMS = {"signup": "vod_project.users.forms.UserSocialSignupForm"}
 
 # django-rest-framework
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.SessionAuthentication",
+        #"rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
     ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    # "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
@@ -312,3 +316,13 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+#SMTP SETTING 
+EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "jobaergaibandha@gmail.com" 
+EMAIL_HOST_PASSWORD = "rfxchydvrqliphlg"
+EMAIL_USE_TLS = True
+
