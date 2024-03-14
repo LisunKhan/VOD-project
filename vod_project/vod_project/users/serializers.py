@@ -19,7 +19,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             phone=validated_data.get('phone', ''),
             birth_date=validated_data.get('birth_date', ''),
             gender=validated_data.get('gender', ''),
-            address=validated_data.get('address', '')
+            address=validated_data.get('address', ''),
         )
         user.set_password(validated_data['password'])
         user.save()
