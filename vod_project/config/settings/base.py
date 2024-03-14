@@ -46,24 +46,15 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+
+
+
 DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "voddb",
-        "USER": "vodjobaer",
-        "PASSWORD": "jobaer",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
+    "default": env.db(
+        "DATABASE_URL",
+        default="postgres://postgres:postgres@localhost:5432/vod_test",
+    ),
 }
-
-
-# DATABASES = {
-#     "default": env.db(
-#         "DATABASE_URL",
-#         default="postgres://postgres:postgres@localhost:5432/vod_test",
-#     ),
-# }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -324,3 +315,13 @@ SPECTACULAR_SETTINGS = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+#SMTP SETTING 
+EMAIL_BACKEND= "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "jobaergaibandha@gmail.com" 
+EMAIL_HOST_PASSWORD = "rfxchydvrqliphlg"
+EMAIL_USE_TLS = True
+
