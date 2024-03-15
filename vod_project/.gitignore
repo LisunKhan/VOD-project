@@ -328,3 +328,4 @@ dump.rdb
 vod_project/media/
 
 .pytest_cache/
+/.env

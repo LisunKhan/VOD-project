@@ -4,10 +4,9 @@ from .views import user_detail_view
 from .views import user_redirect_view
 from .views import user_update_view
 from .views import (UserRegistrationAPIView, UserLoginAPIView,
-    UserChangePasswordAPIView,SendPasswordResetEmailAPIView,
-    UserPasswordResetAPIView,
-)
-
+                    UserChangePasswordAPIView, SendPasswordResetEmailAPIView,
+                    UserPasswordResetAPIView,
+                    )
 
 app_name = "users"
 urlpatterns = [
